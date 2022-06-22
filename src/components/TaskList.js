@@ -31,7 +31,7 @@ TaskList.propTypes = {
     })
   ).isRequired,
   onClickCallback: PropTypes.func,
-  onDeleteCallback: PropTypes.func
+  onDeleteCallback: PropTypes.func,
 
 };
 

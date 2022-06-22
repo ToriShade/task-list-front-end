@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Task.css';
 
 const Task = (props) => {
-  // const [complete, setComplete] = useState(isComplete);
+
   const buttonClass = props.isComplete ? 'tasks__item__toggle--completed' : '';
 
   const flipWhenCompleted = () => {
@@ -14,7 +14,7 @@ const Task = (props) => {
     props.onDeleteCallback(props.id);
   };
   return (
-    <li className="tasks__item">
+    <li className='tasks__item'>
       <button
         className={`tasks__item__toggle ${buttonClass}`}
         // onClick={() => setComplete(!complete)}
@@ -23,8 +23,13 @@ const Task = (props) => {
       >
         {props.title}
       </button>
-      {/* <button className="tasks__item__remove button" onClick={() => deleteTask(props.id)}>x</button> */}
-      <button className="tasks__item__remove button" onClick={deleteTask}>x</button>
+      <button 
+        className='tasks__item__remove button'
+        data-testid={`delete button ${props.id}`}
+        onClick={deleteTask}
+      >
+        x
+      </button>
 
     </li>
   );
@@ -34,8 +39,8 @@ Task.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,
-  onDeleteCallback: PropTypes.func,
-  onClickCallback: PropTypes.func
+  onClickCallback: PropTypes.func.isRequired,
+  onDeleteCallback: PropTypes.func.isRequired,
 };
 
 export default Task;
