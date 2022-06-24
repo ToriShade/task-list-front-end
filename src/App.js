@@ -3,21 +3,10 @@ import TaskList from './components/TaskList.js';
 import './App.css';
 import { useState } from 'react';
 import axios from 'axios';
+import NewTaskForm from './components/NewTaskForm.js';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  // const [tasks, setTasks] = useState([
-  //   {
-  //     id: 1,
-  //     title: 'Mow the lawn',
-  //     isComplete: false,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Cook Pasta',
-  //     isComplete: true,
-  //   },
-  // ]);
 
   useEffect(() => {
     getTasksFromAPI();
@@ -34,7 +23,6 @@ const App = () => {
       });
   };
 
-  // const [tasks, setTasks] =
   const flipIsComplete = (id) => {
     const todoTasks = [...tasks];
     let targetTask;
@@ -104,6 +92,18 @@ const App = () => {
       });
   };
 
+  const makeNewTask = (data) => {
+    console.log(data);
+    axios
+      .post('https://task-list-api-c17.herokuapp.com/tasks', data)
+      .then((response) => {
+        getTasksFromAPI();
+      })
+      .catch((error) => {
+        console.log("COULDN'T MAKE A NEW TASK OH NO! This is in Make New TASK");
+      });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -111,6 +111,7 @@ const App = () => {
       </header>
       <main>
         <div>
+          <NewTaskForm handleSubmission={makeNewTask} />
           <TaskList
             tasks={tasks}
             onClickCallback={flipIsComplete}
