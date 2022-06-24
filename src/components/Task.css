@@ -18,7 +18,8 @@
 }
 
 .tasks__item__toggle--completed {
-  text-decoration: line-through;
+  text-decoration: red line-through;
+  color: goldenrod;
   background-color: rgba(0, 128, 0, 0.15);
   border-color: rgba(0, 128, 0, 0.2);
 }
